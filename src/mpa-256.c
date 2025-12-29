@@ -41,10 +41,10 @@ int bn_free(bn256 *n)
 
 //RELACIÓN DE ORDEN PARA DOS BIG NUM 256
 /*
- * SIGNIFICADO DE CADA RETORNO
- * a > b ~  1
- * a < b ~ -1
- * a = b ~  0
+ * RETORNA:
+ *  1 SI a>b
+ * -1 SI a<b
+ *  0 SI a=b
  * */
 int bn_cmp(const bn256 *a, const bn256 *b)
 {
@@ -66,4 +66,26 @@ int bn_cpy(bn256 *dest, const bn256 *src)
     return 1;
   }
   return -1;
+}
+
+//SUMA DE DOS BIG NUM 256
+/*
+ * RETORNA:
+ *  -1 SI EXISTE UN PROBLEMA DE MEMORIA; APUNTADORES NULOS.
+ *   0 SI NO EXISTE OVERFLOW
+ *   1 SI EXISTE OVERFLOW
+ * */
+int bn_add(bn256 *res, const bn256 *a, const bn256 *b)
+{
+  if(res->w == NULL || a->w == NULL || b->w == NULL) return -1;
+  
+  uint64_t carry = 0;
+
+  for(int i=0; i<WPN; i++)
+  {
+    carry = (uint64_t)a->w[i] + b->w[i] + carry;
+    res->w[i] = (uint32_t)carry; //carry & 0xFFFFFFFF
+    carry >>= 32;
+  }
+  return (int)carry;
 }
