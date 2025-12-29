@@ -26,7 +26,9 @@ int main(int argc, char **argv)
   n.w[6] = 0xFFFFFFFF;
   n.w[7] = 0xFFFFFFFF;  //MSB
 
-  printf("%d", bn_cmp(&a, &b));
+  bn_cpy(&b,&a);
+  printf("%d\n", bn_cmp(&a, &b));
+  bn_print(&b);
 
   bn_free(&b);
   bn_free(&a);

@@ -6,6 +6,19 @@
  * .:DEFINICIONES:.
  * */
 
+//ARHCIVO DE CABECERAS
+#include "mpa-256.h"
+
+//IMPRESIÓN DE BIG NUM 256 
+void bn_print(const bn256 *n)
+{
+  printf("0x");
+  for(int i=WPN-1; i>=0; i--)
+    printf("%08X", n->w[i]);
+  printf("\n");
+}
+
+
 //INICIALIZACIÓN DE UN BIG NUM 256
 int bn_init(bn256 *n)
 {
@@ -41,4 +54,16 @@ int bn_cmp(const bn256 *a, const bn256 *b)
     else if(a->w[i] < b->w[i]) return -1;
   }
   return 0;
+}
+
+//ASIGNACIÓN DE UN BIG NUM 256 A PARTIR DE OTRO
+int bn_cpy(bn256 *dest, const bn256 *src)
+{
+  if(dest->w != NULL && src->w != NULL)
+  { 
+    for(int i=WPN-1; i>=0; i--)
+      dest->w[i] = src->w[i];
+    return 1;
+  }
+  return -1;
 }

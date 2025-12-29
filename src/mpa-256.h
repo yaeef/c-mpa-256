@@ -6,8 +6,15 @@
  * .:PROTOTIPOS:.
  * */
 
+//GUARDA DE CABECERA INICIO
+#ifndef MPA_256_H
+#define MPA_256_H
+
 //BIBLIOTECA PARA USO DE MEMORIA DINAMICA
 #include <stdlib.h>
+
+//BIBLIOTECA PARA USO DE ENTRADAS Y SALIDAS
+#include <stdio.h>
 
 //BIBLIOTECA PARA USO DE "uint_32"
 #include <stdint.h>
@@ -23,13 +30,16 @@ typedef struct
 }bn256;
 
 //PROTOTIPOS
+void bn_print(const bn256* );
 int bn_init(bn256* );
 int bn_free(bn256* );
 int bn_cmp(const bn256*, const bn256* );
+int bn_cpy(bn256*, const bn256* );
 
 
 
 
 
 
-#include "mpa-256.c"
+//GUARDA DE CABECERA FIN
+#endif
