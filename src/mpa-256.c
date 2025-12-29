@@ -89,3 +89,26 @@ int bn_add(bn256 *res, const bn256 *a, const bn256 *b)
   }
   return (int)carry;
 }
+
+//RESTA DE DOS BIG NUM 256
+/*
+ * RETORNA:
+ *  -1 SI EXISTE UN PROBLEMA DE MEMORIA; APUNTADORES NULOS.
+ *   0 SI NO EXISTE UNDERFLOW
+ *   1 SI EXISTE UNDERFLOW
+ * */
+int bn_sub(bn256 *res, const bn256 *a, const bn256 *b)
+{
+  if(res->w == NULL || a->w == NULL || b->w == NULL) return -1;
+
+  uint64_t borrow = 0;
+  uint64_t temp = 0;
+
+  for(int i=0; i<WPN; i++)
+  {
+    temp = (uint64_t)a->w[i] - b->w[i] - borrow;
+    res->w[i] = (uint32_t)temp;
+    borrow = (temp>>32)&1;
+  }
+  return (int)borrow;
+}

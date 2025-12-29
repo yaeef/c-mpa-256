@@ -36,7 +36,7 @@ int bn_free(bn256* );
 int bn_cmp(const bn256*, const bn256* );
 int bn_cpy(bn256*, const bn256* );
 int bn_add(bn256*, const bn256*, const bn256* );
-
+int bn_sub(bn256*, const bn256*, const bn256* );
 
 
 

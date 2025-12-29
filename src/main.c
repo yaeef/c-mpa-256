@@ -30,13 +30,13 @@ int main(int argc, char **argv)
   //bn_cpy(&b,&a);
   //printf("%d\n", bn_cmp(&a, &b));
   //bn_print(&b);
-  bn_add(&res, &a, &b);
+  bn_sub(&res, &a, &b);
   bn_print((&res));
 
   bn_free(&res);
   bn_free(&b);
   bn_free(&a);
   bn_free(&n);
-
+  
   return 0;
 } 
